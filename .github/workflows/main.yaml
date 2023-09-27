@@ -16,8 +16,9 @@ jobs:
         python-version: 3.9.13
 
     - run: pip install -r requirements.txt
-    - run: pyinstaller datalign/main.spec --distpath /dist
-    - run: ren /dist/main.exe DatAlign.exe
+    - run: CHDIR datalign
+    - run: pyinstaller main.spec
+    - run: ren dist/main.exe DatAlign.exe
     - run: pwd
     - run: ls
     - run: ls /dist
