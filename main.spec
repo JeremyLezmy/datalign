@@ -23,7 +23,7 @@ datas += [
          ]
 
 a = Analysis(
-    ['main.py'],
+    ['datalign/main.py'],
     pathex=[],
     binaries=binaries,
     datas=datas,
