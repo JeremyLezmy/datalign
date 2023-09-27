@@ -1,27 +1,23 @@
-
-name: Package Application with Pyinstaller
-
 on:
   push:
-    branches: [ jlezmy/workflow ]
-  pull_request:
-    branches: [ jlezmy/workflow ]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['windows-latest']
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Package Application
-      uses: JackMcKew/pyinstaller-action-windows@main
+    - uses: actions/setup-python@v2
       with:
-        path: datalign
-        requirements: ../requirements.txt
+        python-version: 3.9.13
 
+    - run: pip install -r requirements.txt
+    - run: pyinstaller datalign/main.spec --distpath /dist
+    # Optionally verify that it works (provided that it does not need user interaction)
     - uses: actions/upload-artifact@v2
       with:
-        name: name-of-artifact
-        path: datalign/dist/windows
+        path: dist/DatAlign.exe
