@@ -15,15 +15,15 @@ datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 block_cipher = None
 
 datas += [
-         ( 'wiki\*', 'wiki' ),
+         ( 'datalign\wiki\*', 'wiki' ),
          ]
 
 datas += [
-         ( 'config.yml', '.' ),
+         ( 'datalign\config.yml', '.' ),
          ]
 
 a = Analysis(
-    ['datalign/main.py'],
+    ['datalign\main.py'],
     pathex=[],
     binaries=binaries,
     datas=datas,
