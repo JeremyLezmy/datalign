@@ -25,7 +25,21 @@ jobs:
     - name: Debug ls
       run: ls
       
-    # Optionally verify that it works (provided that it does not need user interaction)
     - uses: actions/upload-artifact@v2
       with:
-        path: dist/*
+        path: dist/DatAlign.exe
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/DatAlign.exe 
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Get Release ID
+      id: get_release_id
+      run: echo "Release ID is ${{ steps.create_release.outputs.id }}"
+    
+    - name: Debug Release ID
+      run: echo ${{ steps.get_release_id.outputs.id }}
