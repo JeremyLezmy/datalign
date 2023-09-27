@@ -14,14 +14,17 @@ jobs:
     - uses: actions/setup-python@v2
       with:
         python-version: 3.9.13
-
+    - name: Installer dependencies
     - run: pip install -r requirements.txt
-    - run: CHDIR datalign
-    - run: pyinstaller main.spec
-    - run: ren dist/main.exe DatAlign.exe
-    - run: pwd
-    - run: ls
-    - run: ls /dist
+
+    - name: Run PyInstaller
+    - run: |
+      pyinstaller main.spec
+      ren dist/main.exe DatAlign.exe
+      pwd
+      ls
+      ls /dist
+    - working-directory: ./datalign
     # Optionally verify that it works (provided that it does not need user interaction)
     - uses: actions/upload-artifact@v2
       with:
