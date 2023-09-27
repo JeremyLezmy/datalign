@@ -1,5 +1,7 @@
 on:
   push:
+    tags:
+      - 'v*' 
 
 jobs:
   build:
@@ -42,6 +44,3 @@ jobs:
     - name: Get Release ID
       id: get_release_id
       run: echo "Release ID is ${{ steps.create_release.outputs.id }}"
-    
-    - name: Debug Release ID
-      run: echo ${{ steps.get_release_id.outputs.id }}
