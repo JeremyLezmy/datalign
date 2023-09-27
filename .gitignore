@@ -1,5 +1,9 @@
 .vscode/*
 .vscode
+build
+build/*
+dist
+dist/*
 datalign/build
 datalign/build/*
 datalign/dist
