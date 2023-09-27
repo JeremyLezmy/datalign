@@ -16,7 +16,8 @@ jobs:
         python-version: 3.9.13
 
     - run: pip install -r requirements.txt
-    - run: pyinstaller datalign/main.spec --distpath /dist --name DatAlign
+    - run: pyinstaller datalign/main.spec --distpath /dist
+    - run: ren /dist/main.exe DatAlign.exe
     # Optionally verify that it works (provided that it does not need user interaction)
     - uses: actions/upload-artifact@v2
       with:
