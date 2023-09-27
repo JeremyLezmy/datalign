@@ -21,10 +21,10 @@ jobs:
       run: |
         pyinstaller main.spec
         ren dist/main.exe DatAlign.exe
-        pwd
-        ls
-        ls /dist
-      working-directory: ./datalign
+
+    - name: Debug ls
+      run: ls
+      
     # Optionally verify that it works (provided that it does not need user interaction)
     - uses: actions/upload-artifact@v2
       with:
