@@ -79,7 +79,7 @@ DatAlign provides two distinct modes of usage, allowing users to align and analy
 
 ### Default view
 
-| ![DatAlign default](datalign\images\default_datalign.png) |
+| ![DatAlign default](datalign/images/default_datalign.png) |
 | :-------------------------------------------------------: |
 |                  *DatAlign default view*                  |
 
