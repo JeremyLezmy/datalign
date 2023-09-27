@@ -1,0 +1,222 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+    color: #ddd;
+
+}
+
+/* Main content container */
+.container {
+    max-width: 800px;
+    margin: 20px;
+
+    /* Added margin for left and right sides */
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.header {
+    background-color: #222;
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    text-align: center;
+    font-size: 3em;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: #fff;
+}
+
+.header img {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+/* Table of Contents */
+.table-of-contents {
+    position: sticky;
+    top: 0;
+    background-color: #f5f5f5;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.table-of-contents h2 {
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.table-of-contents ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.table-of-contents li {
+    margin: 5px 0;
+}
+
+/* Horizontal lines */
+.line {
+    border-top: 1px solid #ccc;
+    margin: 5px 0;
+}
+
+/* Hierarchical indentation */
+h1 {
+    margin-left: 10px;
+    margin-top: 30px;
+    font-size: 24px;
+}
+
+h2 {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+h3 {
+    margin-left: 40px;
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+/* Paragraph */
+p {
+    margin: 30px;
+}
+
+/* Rest of your existing styles */
+
+/* Table of Contents */
+#toc_container {
+    background: #222;
+    border: 1px solid #555;
+    color: #fff;
+    /* background: #f9f9f9 none repeat scroll 0 0; */
+    border: 1px solid #aaa;
+    /* display: table; */
+    font-size: 95%;
+    /* margin-bottom: 1em; */
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    overflow-y: scroll;
+    max-height: calc(100vh - 40px);
+    /* Adjust as needed */
+    box-sizing: border-box;
+}
+
+#toc_container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #222;
+    /* Add your desired padding here */
+    padding-right: 30px;
+    /* Adjust as needed */
+}
+
+
+#toc_container li,
+#toc_container ul,
+#toc_container ul li {
+    list-style: outside none none !important;
+    color: #ddd;
+    margin-bottom: 3px;
+    /* Add margin to create space between list items */
+}
+
+.toc_title {
+    font-weight: 700;
+    font-size: 1.5em;
+    text-align: center;
+    color: #fff;
+}
+
+#toc_container a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+#toc_container ul {
+    list-style-type: none;
+}
+
+
+#toc_container {
+    /* ... (existing styles) ... */
+    position: relative;
+}
+
+.toc_button {
+    /* Other styles */
+    text-decoration: none;
+    border-radius: 50% !important;
+    /* Make the button circular */
+    padding: 13px;
+    /* Adjust padding as needed */
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background-color: #8f5209;
+    color: white;
+    border: 2px solid #8f5209;
+    cursor: pointer;
+    z-index: 1;
+    outline: none;
+    overflow: hidden;
+    perspective: 1px;
+}
+
+.toc_button:hover {
+    background-color: #6e3f08;
+    border: 2px solid #6e3f08;
+}
+
+.main_content li {
+    padding-bottom: 15px;
+}
+
+.main_content {
+    max-width: 800px;
+    /* Adjust the value as needed */
+    margin: 0 auto;
+    padding-left: 0px;
+}
+
+#main_content ul li strong {
+    font-size: 1.2em;
+    /* Adjust the font size as needed */
+}

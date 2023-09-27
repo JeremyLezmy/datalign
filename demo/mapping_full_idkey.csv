@@ -1,0 +1,14 @@
+src;dest;type;info
+id;employee id;;
+full name;full name;;
+mail address;email;;
+supervisor id;supervisor email;;
+credit card;visacard;;
+date of birth;birthdate;date;
+phone;phonenumber;;
+gender;gender;;
+status;employee status;;
+marital status;matrimony;;
+city;city of birth;;
+id_key;id_key;;
+matching_source;matching_source;;

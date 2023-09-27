@@ -1,0 +1,14 @@
+.vscode/*
+.vscode
+datalign/build
+datalign/build/*
+datalign/dist
+datalign/dist/*
+datalign.zip
+align_venv/*
+align_venv
+datalign/__pycache__/*
+*.pyc
+*.__pycache__
+datalign/__pycache__
+azure-pipelines.yml

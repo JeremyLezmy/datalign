@@ -1,0 +1,83 @@
+id_mapping:
+  case_sensitive: false
+  filename: id_mapping.csv
+  method: Basic
+  pivot_alias:
+  - id
+  - email
+  sep: ;
+  source1_id: null
+  source2_id: employee id
+mappingfile:
+  filename: D:/projects/datalign/demo/mapping_full_idkey.csv
+  init_path: D:/projects/datalign/demo/mapping.csv
+  separator: ;
+options:
+  aggregate_exports: false
+  aggregate_values: null
+  debug: true
+  field_comparison_export_filename: full_fields_comparison
+  use_full_id_map: false
+source1:
+  aggregation_field: null
+  all_pivots:
+  - id
+  - mail address
+  automerge_field:
+  - - supervisor id
+    - mail address
+    - id
+  date_format: '%Y/%m/%d'
+  dupl_priority_field: null
+  dupl_priority_value: null
+  fields_lbda_trans:
+  - credit card
+  fields_to_filter: null
+  fields_to_merge:
+  - - first name
+    - last name
+  fields_to_merge_name:
+  - full name
+  filename: D:/projects/datalign/demo/src__full_idkey.csv
+  get_contry_from_le: false
+  id_field: id
+  init_path: D:/projects/datalign/demo/dummy_src.csv
+  lbda_trans:
+  - lambda x:' '.join([x[i:i+4] for i in range(0, len(x), 4)])
+  main_id: id
+  mapping_col_name: src
+  name: src
+  pivot_field: id_key
+  prefix: src_
+  separator: ','
+  skiprows: 0
+  values_to_filter: null
+source2:
+  aggregation_field: null
+  all_pivots:
+  - employee id
+  - email
+  automerge_field: null
+  country_field: ''
+  date_format: '%d-%b-%Y'
+  dupl_priority_field: null
+  dupl_priority_value: null
+  fields_lbda_trans:
+  - PhoneNumber
+  fields_to_filter: null
+  fields_to_merge: null
+  fields_to_merge_name: null
+  filename: D:/projects/datalign/demo/dest__full_idkey.csv
+  id_field: employee id
+  init_path: D:/projects/datalign/demo/dummy_dest.xlsx
+  lbda_trans:
+  - lambda x:x.replace('(','').replace(')','').replace('-','')
+  main_id: Employee ID
+  mapping_col_name: dest
+  name: dest
+  pivot_field: id_key
+  prefix: dest_
+  separator: ','
+  skiprows: 0
+  specific_date_format: true
+  values_to_filter: null

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <link rel="stylesheet" href="wiki_css.css">
+    <title>Configuration Documentation</title>
+</head>
+
+<body>
+    <center>
+        <div class="header">
+            <h1 style="font-size:50px">Welcome to the Wiki page!
+                <img src="emoji.png" alt="logo" />
+            </h1>
+        </div>
+    </center>
+
+    <div id="toc_container">
+        <p class="toc_title">Contents</p>
+        <ul class="toc_list">
+            <li><a href="#Mapping_Format">Mapping Format</a></li>
+            <li><a href="#transformation">Transformations</a></li>
+            <li><a href="#Configuration_Documentation">Configuration Documentation</a>
+                <ul>
+                    <li><a href="#id_mapping">id_mapping</a>
+                        <ul>
+                            <li><a href="#filename_id">filename</a></li>
+                            <li><a href="#method">method</a></li>
+                            <li><a href="#pivot_alias">pivot_alias</a></li>
+                            <li><a href="#sep_id">sep</a></li>
+                            <li><a href="#source1_id">source1_id</a></li>
+                            <li><a href="#source2_id">source2_id</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#mappingfile">mappingfile</a>
+                        <ul>
+                            <li><a href="#filename_map">filename</a></li>
+                            <li><a href="#init_path_map">init_path</a></li>
+                            <li><a href="#sep_map">separator</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#options">options</a>
+                    </li>
+                    <li><a href="#source1">source1 & source2</a>
+                        <ul>
+                            <li><a href="#aggreg_field">aggregation_field</a></li>
+                            <li><a href="#all_pivots">all_pivots</a></li>
+                            <li><a href="#date">date_format</a></li>
+                            <li><a href="#fields_lbda">fields_lbda_trans</a></li>
+                            <li><a href="#lbda_trans">lbda_trans</a></li>
+                            <li><a href="#fields_filter">fields_to_filter</a></li>
+                            <li><a href="#val_to_filt">values_to_filter</a></li>
+                            <li><a href="#fields_to_merge">fields_to_merge</a></li>
+                            <li><a href="#fields_to_merge_name">fields_to_merge_name</a></li>
+                            <li><a href="#dupl_priority_field">dupl_priority_field</a></li>
+                            <li><a href="#dupl_priority_value">dupl_priority_value</a></li>
+                            <li><a href="#automerge_field">automerge_field</a></li>
+                            <li><a href="#filename">filename</a></li>
+                            <li><a href="#contry">get_contry_from_le</a></li>
+                            <li><a href="#id_field">id_field</a></li>
+                            <li><a href="#init_path">init_path</a></li>
+                            <li><a href="#main_id">main_id</a></li>
+                            <li><a href="#mapp_col">mapping_col_name</a></li>
+                            <li><a href="#name">name</a></li>
+                            <li><a href="#pf">pivot_field</a></li>
+                            <li><a href="#pref">prefix</a></li>
+                            <li><a href="#sep">separator</a></li>
+                            <li><a href="#skipr">skiprows</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <ul class="main_content">
+        <center>
+            <h1 id="Mapping_Format">Mapping format</h1>
+        </center>
+        <p>The mapping file has to be a <em>.csv</em> format. As shown below, 3 columns are necessary:</p>
+        <ul>
+            <li><em>src</em> for the first dataframe;</li>
+            <li><em>dest</em> for the second dataframe;</li>
+            <li><em>type</em> of the given field.</li>
+        </ul>
+        <p>If the type of a given field is a date, the string "date" has to be written. Further type might be
+            implemented in the future.</p>
+
+        <center>
+            <img src="mapping_example.png" alt="mapping"></imgsrc>
+        </center>
+
+        <center>
+            <h1 id="transformation">Transformations</h1>
+        </center>
+        <p>The application also allows the user to perform many to one transformations, based on the field name.
+            We give here the steps to apply such transformation on the <em>src</em> file, which can also be applied on
+            the <em>dest</em> file.</p>
+        <ul>
+            <li>The user must create a folder named <em>transformations</em> at the root of the <em>src</em> file.</li>
+            <li>One <em>.csv</em> file with semicolon (";") separator must be created for each field to transform. The
+                file name has
+                to be the same than the field to transform (e.g. <em>gender.csv</em> , <em>country.csv</em>, etc)</li>
+            <li>Each csv file must contain 2 columns : <em>src</em> (value to transform) and <em>dist</em> (transformed
+                value). </li>
+            <li>During the process, the application will automaticaly detect the presence of the
+                <em>transformations</em>
+                folder and iterate over the <em>.csv</em> files inside it.
+            </li>
+        </ul>
+        <p>If there isn't any <em>transformations</em> folder, the code will ignore this step.
+            If a file inside the <em>transformations</em> folder has a name which doesn't correspond with any field in
+            the
+            <em>src</em> file, the transformation will be ignored.
+            This feature is applied before the <em>lambda</em> transformations (see <a
+                href="#fields_lbda">fields_lbda_trans</a></li>).
+        </p>
+
+
+        <center>
+            <h1 id="Configuration_Documentation">Configuration Documentation</h1>
+        </center>
+        <center>
+            <h2 id="id_mapping">id_mapping</h2>
+        </center>
+        <p>Specifies details about ID mapping.</p>
+        <ul>
+            <li id="filename_id"><strong>filename:</strong> Dynamic parameter, do not change.</li>
+            <li id="method"><strong>method:</strong> The method used for the Data Alignment. Only "Basic" implemented
+                yet.</li>
+            <li id="pivot_alias"><strong>pivot_alias:</strong> List of pivot aliases for sheet names in the final
+                report. Aliases should
+                be
+                short.
+                If not provided, only the 15 first characters from the pivot fields will be kept (Excel limitation)</li>
+            <li id="sep_id"><strong>sep:</strong> Depecrated parameter, will be remove soon.</li>
+            <li id="source1_id"><strong>source1_id:</strong> Depecrated parameter, will be remove soon.</li>
+            <li id="source2_id"><strong>source2_id:</strong> Depecrated parameter, will be remove soon.</li>
+        </ul>
+
+        <!-- Repeat similar sections for other parts of the configuration -->
+        <center>
+            <h2 id="mappingfile">mappingfile</h2>
+        </center>
+        <p>Specifies details about the mapping file.</p>
+        <ul>
+            <li id="filename_map"><strong>filename:</strong> Dynamic parameter, do not change.</li>
+            <li id="init_path_map"><strong>init_path:</strong> Path of the mapping file. Have to be a <em>.csv</em>
+                file.
+            </li>
+            <li id="sep_map"><strong>separator:</strong> Separator used for the mapping file.</li>
+            <!-- Include details for filename, init_path, separator, etc. -->
+        </ul>
+
+        <!-- Continue with similar sections for other parts of the configuration -->
+
+        <!-- Repeat similar sections for other parts of the configuration -->
+        <center>
+            <h2 id="options">options</h2>
+        </center>
+        <p>Specifies details about the mapping file.</p>
+        <ul>
+            <em> Depectrated section, will be removed soon.</em>
+            <!-- Include details for filename, init_path, separator, etc. -->
+        </ul>
+
+        <!-- Continue with similar sections for other parts of the configuration -->
+
+        <!-- Repeat similar sections for other parts of the configuration -->
+        <center>
+            <h2 id="source1">source1 & source2</h2>
+        </center>
+        <p>Specifies details about the source 1 configuration.</p>
+        <ul>
+            <li id="aggreg_field"><strong>aggregation_field:</strong> Not implemented yet, ignore.</li>
+            <li><strong>all_pivots:</strong> List of all pivot fields for source 1. Should be parsed as a list as
+                follow:
+                <br> - field 1
+                <br> - field 2
+                <br> - field 3
+            </li>
+            <li id="'all_pivots"><strong>all_pivots:</strong> List of all pivot fields for source 1. Should
+                be parsed as a list
+                as
+                follow:
+                <br> - field 1
+                <br> - field 2
+                <br> - field 3
+            </li>
+            <li id="date"><strong>date_format:</strong> Date format string, for instance : <em>"%Y/%m/%d"</em> for
+                YYYY/MM/DD
+                format. This
+                will allow to modify the date kind fields between both sources.</li>
+            <li id="fields_lbda"><strong>fields_lbda_trans:</strong> List of fields for lambda transformation. Should
+                be parsed as a list
+                as
+                follow:
+                <br> - Field 1
+                <br> - Field 2
+                <br> - Field 3
+            </li>
+            <li id="lbda_trans"><strong>lbda_trans:</strong> List of lambda transformations for fields given in
+                <em>fields_lbda_trans</em>.
+                Each lambda transformation has to be written in python format.
+                <br> For instance : <code>lambda x:x.split('_')[-1]</code>.
+                <br> Should be parsed as a list as
+                follow:
+                <br> - field 1
+                <br> - field 2
+                <br> - field 3
+            </li>
+            <li id="fields_filter"><strong>fields_to_filter:</strong> List of fields to filter. Should be parsed as a
+                list as
+                follow:
+                <br> - Field 1
+                <br> - Field 2
+                <br> - Field 3
+            </li>
+            <li id="val_to_filt"><strong>values_to_filter:</strong> Nested list of values to filter for fields given
+                in
+                <em>fields_to_filter</em>.
+                <br> Should be parsed as a nested list as
+                follow:
+                <br> -&nbsp;&nbsp;- Value 1 (field 1)
+                <br> &nbsp;&nbsp;&nbsp;- Value 2 (field 1)
+                <br> -&nbsp;&nbsp;- Value 1 (field 2)
+                <br> -&nbsp;&nbsp;- Value 1 (field 3)
+            </li>
+            <li id="fields_to_merge"><strong>fields_to_merge:</strong> Fields to merge together. The separator will be a
+                sapce. Should be parsed as a **list of list**.
+                <br> -&nbsp;&nbsp;- Field 1 to merge with
+                <br> &nbsp;&nbsp;&nbsp;- Field 2 and
+                <br> &nbsp;&nbsp;&nbsp;- Field 3
+                <br> -&nbsp;&nbsp;- Field 4 to merge with
+                <br> &nbsp;&nbsp;&nbsp;- Field 5
+            </li>
+            <li id="fields_to_merge_name"><strong>fields_to_merge_name:</strong> Fields name as to give as result to the
+                merged fields in `fields_to_merge`. Should be parsed as a **list**.
+                <br> - Field 1
+                <br> - Field 2
+            </li>
+            <li id="dupl_priority_field"><strong>dupl_priority_field:</strong> Field used to apply a filter on the
+                entries with duplicate _main_id_ to keep
+                some of them depending of this field value (see `dupl_priority_value`). Should be part of the mapping,
+                otherwise ignored.
+            </li>
+            <li id="dupl_priority_value"><strong>dupl_priority_value:</strong> Value used as top priority in the field
+                `dupl_priority_field`. Before isolating
+                values with duplicate _main_id_, the code will grouped them by _main_id_ and check the
+                `dupl_priority_field`. If there is a unique entry with the `dupl_priority_value`, then this entry will
+                be used in the main analysis. Otherwise they will remain in the isolated duplicate _main_id_ entries.
+            </li>
+            <li id="automerge_field"><strong>automerge_field:</strong> Field to automerge with the destination field and
+                the pivot field. Should be parsed as a list of list as follow:
+                <br> -&nbsp;&nbsp;- Field to auto merge (exemple : Manager ID)
+                <br> &nbsp;&nbsp;&nbsp;- Destination field (exemple: Email)
+                <br> &nbsp;&nbsp;&nbsp;- Pivot field (exemple: ID)
+                <br> &nbsp;&nbsp;&nbsp;- New field name (exemple: Manager Email) (optional, if not provided the new
+                values will replace the Field to merge)
+                <br> -&nbsp;&nbsp;- Field to auto merge 2
+                <br> &nbsp;&nbsp;&nbsp;- Destination field 2
+                <br> &nbsp;&nbsp;&nbsp;- Pivot field 2
+                <br> &nbsp;&nbsp;&nbsp;- New field name 2 (optional)
+
+            </li>
+            <li id="filename"><strong>filename:</strong> Dynamic parameter, do not change.</li>
+            <li id="contry"><strong>get_contry_from_le:</strong> Depectrated parameter, will be remove soon.</li>
+            <li id="id_field"><strong>id_field:</strong> Dynamic parameter, do not change.</li>
+            <li id="init_path"><strong>init_path:</strong> Path of the source 1 file. Have to be a <em>.csv</em> or
+                <em>.xlsx</em>
+                file.
+            </li>
+            <li id="main_id"><strong>main_id:</strong> Main ID field for source 1.</li>
+            <li id="mapp_col"><strong>mapping_col_name:</strong> Name of the column in the mapping file corresponding
+                to source 1.
+                Should
+                be "<em>src</em>"</li>
+            <li id="name"><strong>name:</strong> Alias name for source 1 (for instance <em>src</em>). Will be used
+                for generated
+                filename. Soon fuse with
+                <em>prefix</em> parameter.
+            </li>
+            <li id="pf"><strong>pivot_field:</strong> Dynamic parameter, do not change.</li>
+            <li id="pref"><strong>prefix:</strong> Prefix for source 1 (for instance <em>src_</em>). Used as
+                signature for
+                fields/sheets name in the final report.</li>
+            <li id="sep"><strong>separator:</strong> Separator used for source 1 (matter if <em>.csv</em> format).
+            </li>
+            <li id="skipr"><strong>skiprows:</strong> Number of rows to skip for source 1 data (header or blank
+                rows).</li>
+
+        </ul>
+
+
+        <!-- Continue with similar sections for other parts of the configuration -->
+
+        <!-- Repeat similar sections for other parts of the configuration -->
+
+        <!-- <div id="toc_button">
+        <button onclick="scrollToToc()">Back to Contents</button>
+    </div>
+
+    <script>
+        function scrollToToc() {
+            document.querySelector('#toc_container').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script> -->
+    </ul>
+    <a href="#toc_container" class="toc_button">Back to Contents</a>
+</body>
+
+</html>
