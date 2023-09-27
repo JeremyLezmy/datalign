@@ -15,16 +15,16 @@ jobs:
       with:
         python-version: 3.9.13
     - name: Installer dependencies
-    - run: pip install -r requirements.txt
+      run: pip install -r requirements.txt
 
     - name: Run PyInstaller
-    - run: |
-      pyinstaller main.spec
-      ren dist/main.exe DatAlign.exe
-      pwd
-      ls
-      ls /dist
-    - working-directory: ./datalign
+      run: |
+        pyinstaller main.spec
+        ren dist/main.exe DatAlign.exe
+        pwd
+        ls
+        ls /dist
+      working-directory: ./datalign
     # Optionally verify that it works (provided that it does not need user interaction)
     - uses: actions/upload-artifact@v2
       with:
