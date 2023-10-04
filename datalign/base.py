@@ -538,8 +538,9 @@ class BaseAlignment:
         ):
             for field, fct in zip(self.src_lbda_fields, self.src_lbda_fct):
                 print(f"Applying lbda transformation for src on field : {field}")
+                fct = fct.lower() if not self.is_case_sensitive else fct
+                df[field] = df.apply(eval(fct), axis=1, result_type="expand")
 
-                df[field] = df[field].apply(eval(fct))
         if (
             key == "dest"
             and isinstance(self.dest_lbda_fields, list)
@@ -548,7 +549,8 @@ class BaseAlignment:
             for field, fct in zip(self.dest_lbda_fields, self.dest_lbda_fct):
                 print(f"Applying lbda transformation for dest on field : {field}")
                 print(df.head())
-                df[field] = df[field].apply(eval(fct))
+                fct = fct.lower() if not self.is_case_sensitive else fct
+                df[field] = df.apply(eval(fct), axis=1, result_type="expand")
         return df
 
     def _get_warning(self, df, main_id, priority_field=None, priority_value=None):

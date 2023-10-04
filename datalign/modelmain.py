@@ -124,6 +124,8 @@ class Model:
             self.progress.append(0.03)
 
             if self.mode == "Basic":
+                if not os.path.exists(resource_path("config.yml")):
+                    self.generate_config_file(resource_path("config.yml"))
                 alignmode = BaseAlignment(
                     src_path,
                     dest_path,
@@ -489,7 +491,7 @@ class Model:
             },
             "mappingfile": {
                 "filename": None,
-                "init_path": "D:/projects/datalign/demo/mapping.csv",
+                "init_path": "C:\Users\jerem\Libraries\projects\datalign\demo\mapping.csv",
                 "separator": ";",
             },
             "options": {
@@ -519,9 +521,9 @@ class Model:
                 "filename": None,
                 "get_contry_from_le": False,
                 "id_field": "id",
-                "init_path": "D:/projects/datalign/demo/dummy_src.csv",
+                "init_path": "C:\Users\jerem\Libraries\projects\datalign\demo\dummy_src.csv",
                 "lbda_trans": [
-                    "lambda x:' '.join([x[i:i+4] for i in range(0, len(x), 4)])"
+                    "lambda x:' '.join([x['credit card'][i:i+4] for i in range(0, len(x), 4)])"
                 ],
                 "main_id": "id",
                 "mapping_col_name": "src",
@@ -545,12 +547,12 @@ class Model:
                 "fields_to_filter": None,
                 "automerge_field": None,
                 "lbda_trans": [
-                    "lambda x:x.replace('(','').replace(')','').replace('-','')"
+                    "lambda x:x['PhoneNumber'].replace('(','').replace(')','').replace('-','')"
                 ],
                 "fields_to_filter": None,
-                "filename": "C:/Users/jeremy.lezmy/Libraries/Data/Payroll/test/norway_20230728_full_idkey.csv",
+                "filename": None,
                 "id_field": "employee id",
-                "init_path": "D:/projects/datalign/demo/dummy_dest.xlsx",
+                "init_path": "C:\Users\jerem\Libraries\projects\datalign\demo\dummy_dest.xlsx",
                 "main_id": "employee id",
                 "mapping_col_name": "dest",
                 "name": "dest",

@@ -9,8 +9,8 @@ id_mapping:
   source1_id: null
   source2_id: employee id
 mappingfile:
-  filename: D:/projects/datalign/demo/mapping_full_idkey.csv
-  init_path: D:/projects/datalign/demo/mapping.csv
+  filename: C:\Users\jerem\Libraries\projects\datalign\demo/mapping_full_idkey.csv
+  init_path: C:\Users\jerem\Libraries\projects\datalign\demo\mapping.csv
   separator: ;
 options:
   aggregate_exports: false
@@ -38,12 +38,13 @@ source1:
     - last name
   fields_to_merge_name:
   - full name
-  filename: D:/projects/datalign/demo/src__full_idkey.csv
+  filename: C:\Users\jerem\Libraries\projects\datalign\demo/src__full_idkey.csv
   get_contry_from_le: false
   id_field: id
-  init_path: D:/projects/datalign/demo/dummy_src.csv
+  init_path: C:\Users\jerem\Libraries\projects\datalign\demo\dummy_src.csv
   lbda_trans:
-  - lambda x:' '.join([x[i:i+4] for i in range(0, len(x), 4)])
+  - lambda x:' '.join([x['credit card'][i:i+4] for i in range(0, len(x['credit card']),
+    4)])
   main_id: id
   mapping_col_name: src
   name: src
@@ -67,11 +68,11 @@ source2:
   fields_to_filter: null
   fields_to_merge: null
   fields_to_merge_name: null
-  filename: D:/projects/datalign/demo/dest__full_idkey.csv
+  filename: C:\Users\jerem\Libraries\projects\datalign\demo/dest__full_idkey.csv
   id_field: employee id
-  init_path: D:/projects/datalign/demo/dummy_dest.xlsx
+  init_path: C:\Users\jerem\Libraries\projects\datalign\demo\dummy_dest.xlsx
   lbda_trans:
-  - lambda x:x.replace('(','').replace(')','').replace('-','')
+  - lambda x:x['PhoneNumber'].replace('(','').replace(')','').replace('-','')
   main_id: Employee ID
   mapping_col_name: dest
   name: dest

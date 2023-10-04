@@ -43,7 +43,7 @@ source1:
   id_field: id
   init_path: D:/projects/datalign/demo/dummy_src.csv
   lbda_trans:
-  - lambda x:' '.join([x[i:i+4] for i in range(0, len(x), 4)])
+  - lambda x:' '.join([x['credit card'][i:i+4] for i in range(0, len(x), 4)])
   main_id: id
   mapping_col_name: src
   name: src
@@ -71,7 +71,7 @@ source2:
   id_field: employee id
   init_path: D:/projects/datalign/demo/dummy_dest.xlsx
   lbda_trans:
-  - lambda x:x.replace('(','').replace(')','').replace('-','')
+  - lambda x:x['PhoneNumber'].replace('(','').replace(')','').replace('-','')
   main_id: Employee ID
   mapping_col_name: dest
   name: dest
