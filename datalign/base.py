@@ -537,8 +537,20 @@ class BaseAlignment:
             and isinstance(self.src_lbda_fct, list)
         ):
             for field, fct in zip(self.src_lbda_fields, self.src_lbda_fct):
-                print(f"Applying lbda transformation for src on field : {field}")
-                fct = fct.lower() if not self.is_case_sensitive else fct
+                print(
+                    f"Applying lbda transformation for src on field : {field} with function {fct}"
+                )
+
+                exceptions = ["True", "False", "None"]
+                arguments = ["format"]
+                methods = ["strftime"]
+
+                fct = (
+                    convert_string_to_lowercase(fct, exceptions, arguments, methods)
+                    if not self.is_case_sensitive
+                    else fct
+                )
+                # fct = fct.lower() if not self.is_case_sensitive else fct
                 df[field] = df.apply(eval(fct), axis=1, result_type="expand")
 
         if (
@@ -547,9 +559,20 @@ class BaseAlignment:
             and isinstance(self.dest_lbda_fct, list)
         ):
             for field, fct in zip(self.dest_lbda_fields, self.dest_lbda_fct):
-                print(f"Applying lbda transformation for dest on field : {field}")
-                print(df.head())
-                fct = fct.lower() if not self.is_case_sensitive else fct
+                print(
+                    f"Applying lbda transformation for dest on field : {field} with function {fct}"
+                )
+
+                exceptions = ["True", "False", "None"]
+                arguments = ["format"]
+                methods = ["strftime"]
+
+                fct = (
+                    convert_string_to_lowercase(fct, exceptions, arguments, methods)
+                    if not self.is_case_sensitive
+                    else fct
+                )
+                # fct = fct.lower() if not self.is_case_sensitive else fct
                 df[field] = df.apply(eval(fct), axis=1, result_type="expand")
         return df
 

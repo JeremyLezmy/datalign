@@ -225,3 +225,41 @@ def get_workbookformat(workbook, kind="good"):
     if kind == "tofill":
         return workbook.add_format({"bg_color": "#FFFF00"})
     # FFFF00
+
+
+def convert_string_to_lowercase(string_to_lower, exceptions, arguments, methods):
+    import re
+
+    def preserve_exceptions(match, exceptions, arguments, methods):
+        text = match.group(0)
+        if text in exceptions:
+            return text
+        for argument in arguments:
+            if text.startswith(f"{argument}="):
+                return text
+        for method in methods:
+            if text.startswith(f"{method}("):
+                return text
+        return text.lower()
+
+    # Create a pattern for exceptions
+    patterns = [re.escape(exception) for exception in exceptions]
+
+    # Create patterns for specified arguments and their values
+    for argument in arguments:
+        patterns.append(f"{argument}=['\"]([^'\"]*)['\"]")
+
+    # Create a pattern for method arguments
+    method_pattern = "|".join([method for method in methods])
+    patterns.append(f"({method_pattern})\\(([^)]+)\\)")
+
+    # Add a pattern for general words or identifiers
+    patterns.append(r"\w+")
+
+    pattern = "|".join(patterns)
+    result = re.sub(
+        rf"{pattern}",
+        lambda x: preserve_exceptions(x, exceptions, arguments, methods),
+        string_to_lower,
+    )
+    return result
