@@ -58,6 +58,8 @@ def custom_read_df(path, sep=",", skiprows=0, lowerall=False):
     for col in df.columns:
         if pd.api.types.is_datetime64_any_dtype(df[col]):
             df[col] = df[col].dt.strftime("%Y/%m/%d")
+        else:
+            df[col] = df[col].str.strip()
 
     if lowerall:
         df.columns = df.columns.str.lower()
